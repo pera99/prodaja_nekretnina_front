@@ -1,0 +1,10 @@
+#mynavbar li ul{
+    position: absolute;
+    right: 13px;
+    z-index: 300;
+}
+
+#dropdownImage{
+    cursor: pointer;
+}
+

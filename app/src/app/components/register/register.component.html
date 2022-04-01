@@ -1,0 +1,171 @@
+<div class="register vh-100">
+    <div class="container-flex p-4">
+
+        <div class="row">
+            <div class="col-4" style="opacity: 0.9;">
+                <div class="card" style="border-radius: 1rem;">
+                    <div class="row card-body p-5 pt-3">
+
+                        <!-- Elementi forme -->
+                        <h2 class="col-12 mb-3">Register</h2>
+                        
+                        <form ngNativeValidate #form>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Firstname" [(ngModel)]="firstname" required>
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Lastname" [(ngModel)]="lastname" required>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-2">
+                                <input type="text" id="username" name="username" class="form-control" placeholder="Username" [(ngModel)]="username" required>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <input type="password" id="password" name="password" class="form-control" placeholder="Password" 
+                                        [(ngModel)]="password" ngbPopover="Password must contain minumum 8 characters, minimum 1 number , upper letter and special character, must start with letter" popoverTitle="Password" placement="top" required>
+                                </div>
+                                <div class="col mb-2">
+                                    <input type="password" id="confirm_password" name="confirm_password" class="form-control" placeholder="Confirm password" [(ngModel)]="confirm_password" required>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <select id="city" name="city" class="form-select" [(ngModel)]="city">
+                                        <option>Choose city</option>
+                                        <option *ngFor="let c of cities" [value]="c.name">{{c.name}}</option>
+                                    </select> 
+                                </div>
+
+                                <div class="col">
+                                    <input type="tel" id="telephone" name="telephone" class="form-control" placeholder="Telephone" [(ngModel)]="telephone" required>   
+                                </div>
+                            </div>
+                
+                            <div class="col-12 mb-2">
+                                <input type="email" id="email" name="email" class="form-control mb-4" placeholder="Email" [(ngModel)]="email" required>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col">
+                                    <label class="fs-4">Date of Birth:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="date" id="birthday" name="birthday" class="form-control mb-4" [(ngModel)]="birthday" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <span class="form-outline align-middle fs-4">Choose profile picture:</span>                      
+                                </div>
+                                <div class="col"> 
+                                    <input class="form-control" type="file" id="file" name="file" (change)="saveImage($event)"
+                                        ngbPopover="Minimum size of the image must be 100x100 and maximum is 300x300 in .jpg or .png format!" triggers="mouseenter:mouseleave" popoverTitle="Image">
+                                </div>
+                            </div>
+   
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="buyer" value="option1" [(ngModel)]="buyer" [value]="true">
+                                <label class="form-check-label" for="buyer">Buyer</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="advertiser" value="option2" [(ngModel)]="buyer" [value]="false">
+                                <label class="form-check-label" for="advertiser">Advertiser</label>
+                            </div>
+
+                            <br/>
+
+                            <div class="mt-2" *ngIf="!buyer">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="advertiserType" id="independent" value="option1" [(ngModel)]="independent" [value]="true">
+                                    <label class="form-check-label" for="independent">Independent</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="advertiserType" id="agent" value="option2" [(ngModel)]="independent" [value]="false">
+                                    <label class="form-check-label" for="agent">Agent</label>
+                                </div>
+                            </div>
+
+
+                            <div class="row pt-2" *ngIf="!buyer && !independent">
+                                <div class="col">
+                                    <div class="form-outline"> 
+                                        <select id="agency" name="agency" class="form-select" [(ngModel)]="agency">
+                                            <option>Choose agency</option>
+                                            <option *ngFor="let i of agencies" [value]="i.name">{{i.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-outline"> 
+                                        <input id="licence" name="licence" type="number" placeholder="Licence number" class="form-control" [(ngModel)]="licence" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="recaptcha" class="col-6 mt-3">
+                                <ngx-recaptcha2 class="mt-2" #captchaElem [siteKey]="siteKey" (success)="captchaSuccess($event)"></ngx-recaptcha2>
+                            </div>
+                            
+                            <button type="submit" class="col-12 btn btn-lg btn-block btn-primary mb-2" 
+                                [disabled]="captcha_ok==false" (click)="form.checkValidity() ? register() : success_message=error_message='';"
+                                 >Register</button>
+                            <span class="fs-3 text-success">{{success_message}}</span>
+                            <span class="fs-3 text-danger">{{error_message}}</span>
+                        </form>
+                    
+                        <hr/>
+                        
+                        <label>Already have an account?</label>
+                        <button type="button" class="col-12 btn btn-lg btn-block btn-success" routerLink="../login">Login</button>
+                        
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-8" style="opacity: 0.95; margin-top: 10%;">
+                <div class="card" style="border-radius: 1rem;">
+
+                    <div class="row card-body p-3">
+                        <h4 class="col-10 offset-1 mb-1">Advertised</h4>
+
+                        <div class="row">
+                            <div class="col-1"></div>
+                            <div class="col-2" *ngFor="let r of real_estates" style="border-right: 2px solid gray;">
+                                <hr/>
+                                <div class="col-12" >
+                                    <img [src]="r.Images[0]" alt="Logo" style="width: 100%;height: 100%;">
+                                </div>
+                                <div class="col-12">
+                                    <span class="fs-5">Name: {{r.Name}}</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="fs-5">Type: {{r.Type}}</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="fs-5">Price: {{r.Price}}$</span>
+                                </div>
+                                <div class="col-12">
+                                    <span class="fs-5">Lines: {{r.Lines}}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+        </div>
+
+    </div>
+
+
+
+
+  </div>

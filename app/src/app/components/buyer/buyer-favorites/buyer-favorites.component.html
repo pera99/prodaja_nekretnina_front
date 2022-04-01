@@ -1,0 +1,16 @@
+<div class="container">
+    <div *ngFor="let r of real_estates">
+        <div class="row">
+            <div class="col-11">
+                <app-estate-show-brief [real_estate]="r" ></app-estate-show-brief>
+            </div>
+            <div class="col-1">
+                <button class="btn btn-danger" (click)="removeFromFavorites(r)">X</button> 
+            </div>
+        </div>
+        <hr/>
+    </div>
+</div>
+
+
+

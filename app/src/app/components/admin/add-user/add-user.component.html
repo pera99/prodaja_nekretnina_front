@@ -1,0 +1,117 @@
+<div class="container">
+    <h2 class="">Add user</h2> <br/>
+    <p class="fs-3">Enter information to add user to system!</p>
+                        
+    <form ngNativeValidate #form class="">
+        <div class="row p-2 ">
+            <div class="col-4">
+                <input type="text" id="firstname" name="firstname" class="form-control form-control-lg" placeholder="Firstname" [(ngModel)]="firstname" required>
+            </div>
+            <div class="col-4">
+                <input type="text" id="lastname" name="lastname" class="form-control form-control-lg" placeholder="Lastname" [(ngModel)]="lastname" required>
+            </div>
+
+            <div class="col-4">
+                <input type="text" id="username" name="username" class="form-control form-control-lg" placeholder="Username" [(ngModel)]="username" required>
+
+            </div>
+            
+        </div>
+
+        <div class="row p-2">
+            <div class="col-4">
+                <input type="password" id="password" name="password" class="form-control form-control-lg" placeholder="Password" 
+                    [(ngModel)]="password" ngbPopover="Password must contain minumum 8 characters, minimum 1 number , upper letter and special character, must start with letter" popoverTitle="Password" placement="top" required>
+            </div>
+
+            <div class="col-4">
+                <input type="password" id="confirm_password" name="confirm_password" class="form-control form-control-lg" placeholder="Confirm password" [(ngModel)]="confirm_password" required>
+            </div>
+        </div>
+
+        <div class="row p-2 ">
+            <div class="col-4">
+                <select id="city" name="city" class="form-select form-select-lg" [(ngModel)]="city">
+                    <option>Choose city</option>
+                    <option *ngFor="let c of cities" [value]="c.name">{{c.name}}</option>
+                </select> 
+            </div>
+
+            <div class="col-4"> 
+                <input type="tel" id="telephone" name="telephone" class="form-control form-control-lg" placeholder="Telephone" [(ngModel)]="telephone" required>
+            </div>
+
+            <div class="col-4">
+                <input type="email" id="email" name="email" class="form-control form-control-lg mb-4" placeholder="Email" [(ngModel)]="email" required>
+            </div>
+        </div>
+
+        <div class="row p-2 ">
+            <div class="col-4">
+                <label class="fs-4">Date of Birth:</label>
+            </div>
+
+            <div class="col-4">
+                <input type="date" id="birthday" name="birthday" class="form-control form-control-lg" [(ngModel)]="birthday" required>
+            </div>
+        </div>
+
+        <div class="row p-2">
+            <div class="col-4">
+                <span class="form-outline align-middle fs-4">Choose profile picture:</span>                      
+            </div>
+
+            <div class="col-4"> 
+                <input class="form-control form-control-lg" type="file" id="file" name="file" (change)="saveImage($event)"
+                    ngbPopover="Minimum size of the image must be 100x100 and maximum is 300x300 in .jpg or .png format!" triggers="mouseenter:mouseleave" popoverTitle="Image">
+            </div>
+
+        </div>
+    
+    <div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="type" id="buyer" value="option1" [(ngModel)]="buyer" [value]="true">
+            <label class="form-check-label" for="buyer">Buyer</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="type" id="advertiser" value="option2" [(ngModel)]="buyer" [value]="false">
+            <label class="form-check-label" for="advertiser">Advertiser</label>
+        </div>
+    </div>
+
+    
+    <div class="mt-2" *ngIf="!buyer">
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="advertiserType" id="independent" value="option1" [(ngModel)]="independent" [value]="true">
+            <label class="form-check-label" for="independent">Independent</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="advertiserType" id="agent" value="option2" [(ngModel)]="independent" [value]="false">
+            <label class="form-check-label" for="agent">Agent</label>
+        </div>
+    </div>
+    <div class="" *ngIf="!buyer && !independent">
+        <div class="row p-2">
+            <div class="col-4"> 
+                <select id="agency" name="agency" class="form-select form-select-lg" [(ngModel)]="agency">
+                    <option>Choose agency</option>
+                    <option *ngFor="let i of agencies" [value]="i.name">{{i.name}}</option>
+                </select>
+            </div>
+            <div class="col-4"> 
+                <input id="licence" name="licence" type="number" placeholder="Licence number" class="form-control form-control-lg" [(ngModel)]="licence" required>
+            </div>
+            
+        </div>
+    </div>
+    
+    <button type="submit" class="col-4 offset-4 btn btn-lg btn-primary mt-3" 
+    (click)="form.checkValidity() ? add() : success_message=error_message='';"
+    >Add</button>
+
+    <span class="fs-3 text-success">{{success_message}}</span>
+    <span class="fs-3 text-danger">{{error_message}}</span>
+    </form>
+    <hr/>
+
+</div>

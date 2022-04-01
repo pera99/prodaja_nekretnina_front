@@ -1,0 +1,11 @@
+<div class="row data p-3" style="background-color: lightblue;border: 1px solid black;">
+    <div class="col-3">
+        <img [src]="real_estate.Images[0]" alt="Slika" style="width: 100px;height: 100px;">
+        &nbsp; &nbsp; &nbsp;<b>{{real_estate.Name}}</b>
+    </div>
+    <div class="col-9">
+        <b>Location:  &nbsp; &nbsp; &nbsp;</b>{{real_estate.City}}-{{real_estate.Municipality}}-{{real_estate.Microlocation}}&nbsp; &nbsp; &nbsp;
+        <b>Area:&nbsp; &nbsp; &nbsp;</b> {{real_estate.Area}} | <b>Rooms:&nbsp; &nbsp; &nbsp;</b> {{real_estate.Rooms}} | <b>Floor:&nbsp; &nbsp; &nbsp;</b> {{real_estate.Floor}} <br/>
+        <b>About:&nbsp; &nbsp; &nbsp;</b> {{real_estate.About}}
+    </div>
+</div>

@@ -1,0 +1,120 @@
+<div class="container">
+    <h3>Advertiser profile: {{user.firstname}} {{user.lastname}}</h3>
+
+    <div class="row">
+        <!-- change password -->
+        <form ngNativeValidate #form class="col-6">
+            <div class="row">
+                <div class="col-4 fs-3">
+                    Password:
+                </div>
+                <div class="col-4">
+                    <input type="password" id="old_password" name="old_password" class="form-control form-control-lg" placeholder="old_password" [(ngModel)]="old_password" required/>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-4 fs-3">
+                    New password:
+                </div>
+                <div class="col-4">
+                    <input type="password" id="new_password" name="new_password" class="form-control form-control-lg" placeholder="new_password" [(ngModel)]="new_password" required/>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-6 fs-3">
+                    Reapeat new password:
+                </div>
+                <div class="col-5">
+                    <input type="password" id="repeat_new_password" name="repeat_new_password" class="form-control form-control-lg" placeholder="repeat_new_password" [(ngModel)]="repeat_new_password" required/>
+                </div>
+            </div>
+    
+            <div class="row mt-2">
+                <div class="col-4 offset-2">
+                    <button type="submit" class="btn btn-lg btn-block btn-primary" (click)="form.checkValidity() ? changePassword():null">Change password</button>
+                </div>
+                <div class="col-4">
+                    <span class="fs-4 text-danger">{{message_password}}</span>
+                </div>
+            </div>
+    
+        </form>
+
+        <!-- change phone and email -->
+        <form ngNativeValidate #form class="col-6">
+            <div class="row">
+                <div class="col-4 fs-3">
+                    Change phone:
+                </div>
+                <div class="col-4">
+                    <input type="tel" id="telephone" name="telephone" class="form-control form-control-lg" placeholder="Telephone" [(ngModel)]="telephone">
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="col-4 fs-3">
+                    Change email:
+                </div>
+                <div class="col-4">
+                    <input type="email" id="email" name="email" class="form-control form-control-lg" placeholder="Email" [(ngModel)]="email">
+                </div>
+            </div>
+    
+            <div class="row mt-2">
+                <div class="col-2 offset-2">
+                    <button type="submit" class="btn btn-lg btn-block btn-primary" (click)="updateAdvertiserInfo()">Update</button>
+                </div>
+                <div class="col-4">
+                    <span class="fs-4 text-warning">{{message_update}}</span>
+                </div>
+            </div>
+    
+        </form>
+    </div>
+    
+
+    <div class="row mt-5">
+        <form ngNativeValidate #form class="col-12">
+            <div class="row" *ngIf="user.advertiserType=='agent'">
+                <div class="col-12 fs-3">
+                    Vec ste zaposleni, mozete odabrati novu agenciju!
+                </div>
+            </div>
+            <div class="row" *ngIf="user.advertiserType=='independent'">
+                <div class="col-12 fs-3">
+                    Niste zaposleni, moze se zaposliti odabirom agencije!
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-3 offset-3 fs-3">
+                    Choose agency:
+                </div>
+                <div class="col-3">
+                    <select id="agency" name="agency" class="form-select form-select-lg" [(ngModel)]="agency">
+                        <option *ngFor="let i of agencies" [value]="i.name">{{i.name}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-3 offset-3 fs-3">
+                    Licence number:
+                </div>
+                <div class="col-3">
+                    <input id="licence" name="licence" type="number" placeholder="Licence number" class="form-control form-control-lg" [(ngModel)]="licence" required>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-2 offset-5">
+                    <button type="submit" class="btn btn-lg btn-block btn-primary" (click)="updateAdvertiserAgency()">Join agency</button>
+                </div>
+                <div class="col-4">
+                    <span class="fs-4 text-warning">{{message_joinAgency}}</span>
+                </div>
+            </div>
+    
+        </form>
+    </div>
+    
+</div>

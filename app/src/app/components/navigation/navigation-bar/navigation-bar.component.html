@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white p-5 pt-3">
+    <div class="container-fluid">
+      <a class="navbar-brand">
+        <img src="/assets/images/real_estate_logo.jpg" alt="Logo" style="width: 100px;height: 100px;">
+      </a>
+      <button
+        class="navbar-toggler d-flex d-lg-none"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#mynavbar"
+        aria-controls="mynavbar"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+        (click)="isCollapsed=!isCollapsed"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="mynavbar" [ngbCollapse]="isCollapsed">
+        <span class="fs-4">Real estate app</span>
+        <ul class="navbar-nav ms-auto text-center nav-tabs">
+          <li *ngFor="let item of navItems" class="nav-item active p-4 text-uppercase fs-5" style="letter-spacing: 5px;font-weight: 500;">
+            <a class="nav-link" [routerLink]="item.path" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:
+                false}">{{item.name}}</a>
+          </li>
+          <li>
+            <div class="dropdown-toggle" id="dropdownImage" data-bs-toggle="dropdown" aria-expanded="false" [attr.aria-expanded]="!collapseImageMenu"  
+              aria-controls="userCollapse" (click)="collapseImageMenu=!collapseImageMenu">
+              <img [src]="user.image" alt="Logo" style="width: 100px;height: 100px;">
+            </div>
+
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="collapseImageMenu" class="dropdown">
+              <ul class="collapse" aria-labelledby="imageDropdown" [ngbCollapse]="collapseImageMenu" style="list-style-type: none;">
+                <li class="link bg-secondary" style="border-bottom: 2px solid black;width: 100px;">
+                  <a routerLink="./profile" class="nav-link text-black">Profile</a>
+                </li>
+                <li class="link bg-secondary">
+                  <a routerLink="." class="nav-link text-black" (click)="logout()">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+  
+    </div>
+</nav>

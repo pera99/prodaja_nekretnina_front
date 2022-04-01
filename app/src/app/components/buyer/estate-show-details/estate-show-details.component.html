@@ -1,0 +1,180 @@
+<div class="container data" style="border: 2px solid black;">
+    <div class="row" style="background-color: lightgray;">
+        <div class="col-4">
+            <h3>{{real_estate.Microlocation}} - {{real_estate.Name}}</h3>
+        </div>
+        <div class="col-4 offset-3 pt-3">
+            <h6>{{real_estate.City}} - Opstina {{real_estate.Municipality}} - {{real_estate.Microlocation}} - {{real_estate.Street}}</h6>
+        </div>
+        <div class="col-1 pt-1">
+            <button class="btn btn-danger" (click)="deSelect()">X</button>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-5">
+            <!-- SLIKE SLIDER -->
+            <ngb-carousel *ngIf="real_estate.Images" [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+                <ng-template ngbSlide *ngFor="let image of real_estate.Images">
+                  <div class="picsum-img-wrapper">
+                    <img [src]="image" alt="Random slide" style="width: 100%;height: 150px;">
+                  </div>
+                  <div class="carousel-caption">
+
+                  </div>
+                </ng-template>
+            </ngb-carousel>
+              
+            <hr>
+              
+            <div class="btn-group col-8 offset-4" role="group" aria-label="Carousel toggle controls">
+                <button type="button" (click)="showNavigationArrows = !showNavigationArrows" class="col-4 btn btn-outline-dark btn-sm">Toggle arrows</button>
+                <button type="button" (click)="showNavigationIndicators = !showNavigationIndicators" class="col-4 btn btn-outline-dark btn-sm">Toggle indicators</button>
+                <div class="col-4 offset-4">
+                    <!-- CENA -->
+                    <span class="fs-4 text-success" *ngIf="(real_estate.Price/real_estate.Area)<=prosecna_cena.avgAmount"> {{real_estate.Price}} &euro;</span>
+                    <span class="fs-4 text-danger" *ngIf="(real_estate.Price/real_estate.Area)>prosecna_cena.avgAmount"> {{real_estate.Price}} &euro;</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 offset-1">
+            <!-- info -->
+            <div class="row">
+                <div class="col-4">
+                    <button>Tip: {{real_estate.Type}}</button>
+                </div>
+                <div class="col-4">
+                    <button>Kvadratura: {{real_estate.Area}}m2</button>
+                </div>
+                <div class="col-4">
+                    <button>Soba: {{real_estate.Rooms}}</button>
+                </div>
+                <hr/>
+
+                <div class="col-6">
+                    <span>Oglasivac: {{real_estate.advertiserType}}</span>
+                </div>
+                <div class="col-6">
+                    <span>Sprat: {{real_estate.Floor}}</span>
+                </div>
+                <div class="col-6">
+                    <span>Godina izgradnje: {{real_estate.ConstructionYear}}</span>
+                </div>
+                <div class="col-6">
+                    <span>Ukupna spratnost: {{real_estate.TotalFloors}}</span>
+                </div>
+                <div class="col-6">
+                    <span>Stanje nekretnine: {{real_estate.State}}</span>
+                </div>
+                <div class="col-6">
+                    <span>Parking: {{real_estate.Parking}}</span>
+                </div>
+                <div class="col-6">
+                    <span>Tip grejanja: {{real_estate.Heating}}</span>
+                </div>
+                <div class="col-3 m-4">
+                    <!-- button dodaj u omiljene -->
+                    <button class="btn btn-primary" (click)="addToFavorites()">Add to favorites</button>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-6">
+            <!-- karakteristike -->
+            <h4>Karakteristike</h4>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="terasa" [(ngModel)]="terasa" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Terasa</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="terasa" [(ngModel)]="podrum" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Podrum</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="internet" [(ngModel)]="internet" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Internet</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="lodja" [(ngModel)]="lodja" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Lodja</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="garaza" [(ngModel)]="garaza" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Garaza</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="interfon" [(ngModel)]="interfon" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Interfon</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="balkon" [(ngModel)]="balkon" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Balkon</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="basta" [(ngModel)]="basta" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Basta</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="telefon" [(ngModel)]="telefon" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Telefon</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="lift" [(ngModel)]="lift" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Lift</label>
+            </div>
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="type" id="buyer" value="klima" [(ngModel)]="klima" [value]="" disabled>
+                <label class="form-check-label" for="buyer">Klima</label>
+            </div>
+
+        </div>
+        <div class="col-6" style="border: 1px solid gray;">
+            <!-- opis i prosecna cena na lokaciji -->
+            <h4 class="col-11 offset-1">Opis:</h4>
+            <span class="col-12 fs-6">{{real_estate.About}}</span>
+            <br/>
+            <span class="col-12 fs-4" *ngIf="prosecna_cena!=null">Prosecna cena na lokaciji: {{prosecna_cena.avgAmount | number: '1.0-0'}} &euro;/m2</span>
+        </div>
+    </div>
+
+
+</div>
+
+<!-- info o user-u -->
+<div class="container">
+    <div class="row">
+        <div class="col-6" *ngIf="advertiser.advertiserType=='independent'">
+            <button class="btn btn-primary" (click)="toggleShown()">+</button>
+            <span class="fs-3" *ngIf="shown">{{advertiser.telephone}}</span> <br/>
+            <span class="fs-3">Advertiser: {{advertiser.firstname}}  {{advertiser.lastname}}</span>
+        </div>
+    
+        <div class="col-6" *ngIf="advertiser.advertiserType=='agent'">
+            <span>Agency: {{agency.name}} {{agency.address}} {{agency.city}} {{agency.pib}}</span><br/>
+            <span class="fs-3">Agent: {{advertiser.firstname}}  {{advertiser.lastname}}</span><br/>
+            <span class="fs-3">Licence: {{advertiser.licence}} </span>
+    
+            <button class="btn btn-primary" (click)="toggleShown()">+</button>
+            <span class="fs-3" *ngIf="shown">{{advertiser.telephone}}</span> <br/>
+        </div>
+    </div>
+</div>
+
+
+<!-- mapa -->

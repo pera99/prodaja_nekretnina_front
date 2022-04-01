@@ -1,0 +1,65 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2" style="background-color: black;">
+      <div class="navbar navbar-expand d-flex flex-column align-item-start" id="sidebar">
+        <div class="display-5 font-weight-bold text-white">OPTIONS</div>
+        <ul class="navbar-nav d-flex flex-column p-3 mt-1 w-100">
+
+          <li class="nav-item">
+            <a routerLink="." class="nav-link text-light dropdown-toggle" [attr.aria-expanded]="!collapseUserMenu"  
+              aria-controls="userCollapse" (click)="collapseUserMenu=!collapseUserMenu">Users</a>
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="collapseUserMenu">
+              <ul class="d-flex flex-column w-100 collapse" aria-labelledby="userDropdown" [ngbCollapse]="collapseUserMenu">
+                <li class="link">
+                  <a routerLink="." class="nav-link text-white pl-4 p-2">Registration requests</a>
+                </li>
+                <li class="link">
+                  <a routerLink="./addUsers" class="nav-link text-white pl-4 p-2">Add users</a>
+                </li>
+                <li class="link">
+                  <a routerLink="./updateUsers" class="nav-link text-white pl-4 p-2">Update users</a>
+                </li>
+                <li class="link">
+                  <a routerLink="./deleteUsers" class="nav-link text-white pl-4 p-2">Delete users</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="." class="nav-link text-light dropdown-toggle" [attr.aria-expanded]="!collapseAgencyMenu"  
+              aria-controls="userCollapse" (click)="collapseAgencyMenu=!collapseAgencyMenu">Agencies</a>
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="collapseAgencyMenu">
+              <ul class="d-flex flex-column w-100 collapse" aria-labelledby="userDropdown" [ngbCollapse]="collapseAgencyMenu">
+                <li class="link">
+                  <a routerLink="./addAgency" class="nav-link text-white pl-4 p-2">Add agency</a>
+                </li>
+
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <a routerLink="." class="nav-link text-light dropdown-toggle" [attr.aria-expanded]="!collapseMicrolocationsMenu"  
+              aria-controls="userCollapse" (click)="collapseMicrolocationsMenu=!collapseMicrolocationsMenu">Microlocations</a>
+            <div #collapse="ngbCollapse" [(ngbCollapse)]="collapseMicrolocationsMenu">
+              <ul class="d-flex flex-column w-100 collapse" aria-labelledby="userDropdown" [ngbCollapse]="collapseAgencyMenu">
+                <li class="link">
+                  <a routerLink="./addMicrolocation" class="nav-link text-white pl-4 p-2">Add microlocation</a>
+                </li>
+                <li class="link">
+                  <a routerLink="./deleteMicrolocation" class="nav-link text-white pl-4 p-2">Delete microlocation</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+    <div class="col-10">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,122 @@
+<div class="container" *ngIf="!selected">
+    <form ngNativeValidate #form >
+
+        <div class="row mb-2">
+
+            <div class="col-2">
+                <input type="number" id="min_price" name="min_price" class="form-control" placeholder="Price od" [(ngModel)]="min_price" >
+            </div>
+
+            <div class="col-2" style="border-right: 3px solid black;">
+                 <input type="number" id="max_price" name="max_price" class="form-control" placeholder="Price do" [(ngModel)]="max_price" >
+            </div>
+
+            <div class="col-2">
+                <input type="number" id="min_area" name="min_area" class="form-control" placeholder="Area od" [(ngModel)]="min_area" >
+            </div>
+            
+            <div class="col-2">
+                <input type="number" id="max_area" name="max_area" class="form-control" placeholder="Area od" [(ngModel)]="max_area" >
+            </div>
+
+        </div>
+
+        <div class="row mb-2">
+
+            <div class="col-2">
+                <input type="number" id="min_rooms" name="min_rooms" class="form-control" placeholder="Rooms od" [(ngModel)]="min_rooms" >
+            </div>
+
+
+            <div class="col-2" style="border-right: 3px solid black;">
+                 <input type="number" id="max_rooms" name="max_rooms" class="form-control" placeholder="Rooms do" [(ngModel)]="max_rooms" >
+            </div>
+
+            <div class="col-2">
+                <input type="number" id="year_od" name="year_od" class="form-control" placeholder="Year od" [(ngModel)]="year_od" >
+            </div>
+            
+            <div class="col-2">
+                <input type="number" id="year_do" name="year_do" class="form-control" placeholder="Year do" [(ngModel)]="year_do" >
+            </div>
+
+        </div>
+
+        <div class="row mb-2">
+
+            <div class="col-2">
+                <select multiple id="advertiser_type" name="advertiser_type" class="form-select form-select-lg" [(ngModel)]="advertiser_type">
+                    <option>Choose type:</option>
+                    <option>agent</option>
+                    <option>independent</option>
+                </select> 
+            </div>
+
+            <div class="col-2">
+                <select multiple id="stanje_nekretnine" name="stanje_nekretnine" class="form-select form-select-lg" [(ngModel)]="stanje_nekretnine">
+                    <option>Choose type:</option>
+                    <option *ngFor="let s of states" [value]="s">{{s}}</option>
+                </select> 
+            </div>
+
+            <div class="col-2">
+                <select multiple id="tip_grejanja" name="tip_grejanja" class="form-select form-select-lg" [(ngModel)]="tip_grejanja">
+                    <option>Choose type:</option>
+                    <option *ngFor="let h of heatings" [value]="h">{{h}}</option>
+                </select> 
+            </div>
+
+            <div class="col-3">
+                <select id="characteristics" multiple size="3" name="characteristics" class="form-select form-select-lg" [(ngModel)]="characteristics">
+                    <option>Choose characteristics</option>
+                    <option *ngFor="let c of all_characteristics" [value]="c">{{c}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-2">
+                <input type="number" id="floor_od" name="floor_od" class="form-control form-control-lg" placeholder="Floor od" [(ngModel)]="floor_od" >
+            </div>
+
+            <div class="col-2" style="border-right: 3px solid black;">
+                 <input type="number" id="floor_do" name="floor_do" class="form-control form-control-lg" placeholder="Floor do" [(ngModel)]="floor_do" >
+            </div>
+
+            <div class="col-2">
+                <input type="number" id="mesecne_rezije_od" name="mesecne_rezije_od" class="form-control form-control-lg" placeholder="Mes. rezije od" [(ngModel)]="mesecne_rezije_od" >
+            </div>
+            
+            <div class="col-2">
+                <input type="number" id="mesecne_rezije_do" name="mesecne_rezije_do" class="form-control form-control-lg" placeholder="Mes. rezije do" [(ngModel)]="mesecne_rezije_do" >
+            </div>
+
+        </div>
+
+        <div class="row mt-1">
+            <div class="col-2 offset-1">
+                <button type="submit" class="btn btn-lg btn-block btn-secondary col-12" (click)="form.checkValidity() ? search():null">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <span class="fs-3 text-success">{{success_message}}</span>
+    <span class="fs-3 text-danger">{{error_message}}</span>
+
+    <hr/>
+
+
+    <div *ngIf="searched==true" class="data">
+        <div *ngFor="let r of real_estates | slice: (page-1) * pageSize : (page-1) * pageSize+pageSize">
+            <app-estate-show-brief [real_estate]="r" (click)="showDetails(r)"></app-estate-show-brief>
+            <hr/>
+        </div>
+        <ngb-pagination [collectionSize]="real_estates.length" [(page)]="page" [boundaryLinks]="true"></ngb-pagination>
+    </div>
+
+</div>
+
+<div *ngIf="selected">
+    <app-estate-show-details [real_estate]="selected" [deSelect]="this.deSelect.bind(this)"></app-estate-show-details>
+</div>

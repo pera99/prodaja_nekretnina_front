@@ -1,0 +1,39 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Firstname</th>
+          <th scope="col">Lastname</th>
+          <th scope="col">Username</th>
+          <th scope="col">Password</th>
+          <th scope="col">City</th>
+          <th scope="col">Telephone</th>
+          <th scope="col">Email</th>
+          <th scope="col">Birthday</th>
+          <th scope="col">Type</th>
+          <th scope="col">Advertiser type</th>
+          <th scope="col">Agency</th>
+          <th scope="col">Licence</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{user.username}}</td>
+          <td>{{user.lastname}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.password}}</td>
+          <td>{{user.city}}</td>
+          <td>{{user.telephone}}</td>
+          <td>{{user.email}}</td>
+          <td>{{user.birthday | date}}</td>
+          <td>{{user.type}}</td>
+          <td>{{user.type=="buyer" ? "X":user.advertiserType}}</td>
+          <td>{{user.type=="buyer" ? "X" : (user.advertiserType=="agent"?user.agency:"X")}}</td>
+          <td>{{user.type=="buyer" ? "X" : (user.advertiserType=="agent"?user.licence:"X")}}</td>
+          <td><button class="btn btn-success" (click)="acceptUser(user.username)">Accept</button></td>
+          <td><button class="btn btn-danger" (click)="rejectUser(user.username)">Reject</button></td>
+        </tr>
+        </tbody>
+  </table>
+  

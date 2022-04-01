@@ -1,0 +1,196 @@
+<div class="container">
+
+    <div class="p-2" style="border: 2px solid black;">
+        <h2 style="display: inline;">Add real estate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2> 
+        <h2 class="text-success" style="display: inline;">{{success_message}}</h2>
+        <h2 class="text-danger" style="display: inline;">{{error_message}}</h2>
+        <br/>
+        <p class="fs-3">Enter information to add real estate!</p>
+
+        <form ngNativeValidate #form class="mb-2">
+            <div class="row p-2">
+
+                <div class="col-3">
+                    <input type="name" id="name" name="name" class="form-control form-control-lg" placeholder="Name" [(ngModel)]="name" required>
+                </div>
+
+                <div class="col-3">
+                    <div class="">
+                        <select id="type" name="type" class="form-select form-select-lg" [(ngModel)]="type">
+                            <option>Choose type</option>
+                            <option *ngFor="let i of types" [value]="i">{{i}}</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="">
+                        <select id="city" name="city" class="form-select form-select-lg" [ngModel]="city" (ngModelChange)="setMunicipalityList($event)">
+                            <option>Choose city</option>
+                            <option *ngFor="let c of cities" [value]="c.name">{{c.name}}</option>
+                        </select>
+                    </div>
+                
+                </div>
+
+                <div class="col-3">
+                    <div class="">
+                        <select id="municipality" name="municipality" class="form-select form-select-lg" [ngModel]="municipality" (ngModelChange)="setMicrolocationList($event)">
+                            <option>Choose municipality</option>
+                            <option *ngFor="let m of municipalities" [value]="m">{{m}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+
+            <div class="row p-2">
+
+                <div class="col-3">
+                    <select id="microlocation" name="microlocation" class="form-select form-select-lg" [(ngModel)]="microlocation">
+                        <option>Choose microlocation</option>
+                        <option *ngFor="let m of microlocations" [value]="m.name">{{m.name}}</option>
+                    </select> 
+                </div>
+
+                <div class="col-3">
+                    <input type="text" id="street" name="street" class="form-control form-control-lg" placeholder="Street" [(ngModel)]="street" required>
+                </div>
+                <div class="col-3">
+                    <input type="number" step="0.1" id="area" name="area" class="form-control form-control-lg" placeholder="Area" [(ngModel)]="area" required>
+                </div>
+
+                <div class="col-3">
+                    <input type="number" step="0.5" id="rooms" name="rooms" class="form-control form-control-lg" placeholder="Rooms" [(ngModel)]="rooms" required>
+                </div>
+
+
+            </div>
+
+            <div class="row p-2">
+
+                <div class="col-3">
+                    <input type="number" id="price" name="price" class="form-control form-control-lg" placeholder="Price" [(ngModel)]="price" required>
+                </div>
+
+                <div class="col-3">
+                    <input type="number" id="construction_year" name="construction_year" class="form-control form-control-lg" placeholder="Construction year" [(ngModel)]="construction_year" required>
+                </div>
+
+                <div class="col-3">
+                    <select id="state" name="state" class="form-select form-select-lg" [(ngModel)]="state">
+                        <option>Choose state</option>
+                        <option *ngFor="let i of states" [value]="i">{{i}}</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <select id="heating" name="heating" class="form-select form-select-lg" [(ngModel)]="heating">
+                        <option>Choose heating</option>
+                        <option *ngFor="let i of heatings" [value]="i">{{i}}</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="row p-2">
+                
+                <div class="col-3">
+                    <input type="number" id="floor" name="floor" class="form-control form-control-lg" placeholder="Floor" [(ngModel)]="floor" required>
+                </div>
+
+                <div class="col-3">
+                    <input type="number" id="totalfloors" name="totalfloors" class="form-control form-control-lg" placeholder="Total floors" [(ngModel)]="total_floors" required>
+                </div>
+
+                <div class="col-3 ">
+                    <select id="parking" name="parking" class="form-select form-select-lg" [(ngModel)]="parking">
+                        <option>Parking</option>
+                        <option>Yes</option>
+                        <option>No</option>
+                    </select>
+                </div>
+
+                <div class="col-3">
+                    <input type="number" id="monthly_utilities" name="monthly_utilities" class="form-control form-control-lg" placeholder="Monthly utilities" [(ngModel)]="monthly_utilities" required>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-3">
+                    <select id="lines" multiple size="3" name="lines" class="form-select form-select-lg" [(ngModel)]="lines">
+                        <option>Choose lines</option>
+                        <option *ngFor="let l of all_lines" [value]="l">{{l}}</option>
+                    </select>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <textarea class="form-control rounded-0" id="description" name="description" rows="4" placeholder="Description" [(ngModel)]="description"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <select id="characteristics" multiple size="3" name="characteristics" class="form-select form-select-lg" [(ngModel)]="characteristics">
+                        <option>Choose characteristics</option>
+                        <option *ngFor="let c of all_characteristics" [value]="c">{{c}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-2 offset-3">
+                    <div class="form-outline mb-3">
+                        <span class="form-outline align-middle fs-4">Choose images:</span>                      
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-outline mb-3"> 
+                        <input class="form-control" type="file" id="file" name="file" (change)="saveImage($event)" multiple
+                            ngbPopover="Minimum size of the image must be 100x100 and maximum is 300x300 in .jpg or .png format! Min 3 Max 6" triggers="mouseenter:mouseleave" popoverTitle="Image">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-2 mt-2 offset-5">
+                <button type="submit" class="btn btn-lg btn-block btn-primary col-12" (click)="form.checkValidity() ? add():null">Add</button>
+            </div>
+    
+    
+        </form>
+
+        <!-- JSON UPLOAD -->
+        <div class="row mt-2">
+            <div class="col-2">
+                <div class="form-outline mb-3">
+                    <span class="form-outline align-middle fs-4">JSON upload:</span>                      
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-outline mb-3"> 
+                    <input
+                    style="display: none"
+                    type="file" (change)="onFileChanged($event)"
+                    #fileInput>
+                  <button class="btn btn-primary" (click)="fileInput.click()">Select File</button>
+                </div>
+            </div>
+
+            <div class="col-3">
+                <div class="form-outline mb-3"> 
+                    <input class="form-control" type="file" id="file" name="file" (change)="saveImageJSON($event)" multiple [disabled]="!real_estate_json"
+                        ngbPopover="Minimum size of the image must be 100x100 and maximum is 300x300 in .jpg or .png format! Min 3 Max 6" triggers="mouseenter:mouseleave" popoverTitle="Image">
+                </div>
+            </div>
+
+            <div class="col-2">
+                <button class="btn btn-primary" (click)="saveJSON()">Upload JSON!</button>
+            </div>
+        </div>
+
+    </div>
+
+</div>

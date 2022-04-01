@@ -1,0 +1,47 @@
+<div class="container">
+    <h2 class="">Add agency</h2> <br/>
+    <p class="fs-3">Enter information to add agency to system!</p>
+                        
+    <form ngNativeValidate #form class="">
+        <div class="row p-2">
+            <div class="col-4">
+                <input type="text" id="name" name="name" class="form-control form-control-lg" placeholder="Name" [(ngModel)]="name" required>
+            </div>
+            <div class="col-4">
+                <input type="text" id="address" name="address" class="form-control form-control-lg" placeholder="Address" [(ngModel)]="address" required>
+            </div>
+
+            <div class="col-4">
+                <select id="city" name="city" class="form-select form-select-lg" [(ngModel)]="city">
+                    <option>Choose city</option>
+                    <option *ngFor="let c of cities" [value]="c.name">{{c.name}}</option>
+                </select>
+            
+            </div>
+        </div>
+
+        <div class="row p-2">
+            <div class="col-4">
+                <input type="tel" id="telephone" name="telephone" class="form-control form-control-lg" placeholder="Telephone" 
+                    [(ngModel)]="telephone" required>
+            </div>
+
+            <div class="col-4">
+                <input type="text" id="pib" name="pib" class="form-control form-control-lg" placeholder="PIB" [(ngModel)]="pib" required>
+            </div>
+        </div>
+    
+        <div class="row">
+            <button type="submit" class="col-4 offset-4 btn btn-lg btn-primary mt-3" 
+            (click)="form.checkValidity() ? add() : success_message=error_message='';"
+            >Add</button>
+        </div>
+
+
+        <span class="fs-3 text-success">{{success_message}}</span>
+        <span class="fs-3 text-danger">{{error_message}}</span>
+    </form>
+    <hr/>
+
+</div>
+

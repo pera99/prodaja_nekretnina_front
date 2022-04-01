@@ -1,0 +1,52 @@
+<div class="container text-center">
+    <h2 class="">Add microlocation</h2> <br/>
+    <p class="fs-3">Enter information to add microlocation to system!</p>
+    <p class="fs-3">You can also add street to microlocation!</p>
+                        
+    
+    <form ngNativeValidate #form class="row text-center">
+
+        <div class="col-3">
+            <select id="city" name="city" class="form-select form-select-lg" [ngModel]="city" (ngModelChange)="setMunicipalityList($event)">
+                <option>Choose city</option>
+                <option *ngFor="let c of cities" [value]="c.name">{{c.name}}</option>
+            </select> 
+        </div>
+
+        <div class="col-3">
+            <select id="municipality" name="municipality" class="form-select form-select-lg" [ngModel]="municipality" (ngModelChange)="setMicrolocationList($event)">
+                <option>Choose municipality</option>
+                <option *ngFor="let m of municipalities" [value]="m">{{m}}</option>
+            </select> 
+        </div>
+
+        <div class="col-3">
+            <select id="agency" name="agency" class="form-select form-select-lg" [(ngModel)]="microlocation">
+                <option>Choose microlocation</option>
+                <option *ngFor="let m of microlocations" [value]="m.name">{{m.name}}</option>
+            </select> 
+        </div>
+
+        <div class="col-3">
+            <div *ngIf="microlocation=='Choose microlocation'">
+                <input type="text" id="new_microlocation" name="new_microlocation" class="form-control form-control-lg" placeholder="Add microlocation" [(ngModel)]="new_microlocation" required>
+            </div>
+            <div *ngIf="microlocation!='Choose microlocation'">
+                <input type="text" id="street" name="street" class="form-control form-control-lg" placeholder="Add street" [(ngModel)]="new_street" required>
+            </div>
+
+        </div>
+
+        <div class="col-2 mt-2 offset-5">
+            <button type="submit" class="btn btn-lg btn-block btn-primary col-12" (click)="form.checkValidity() ? add():null">Add</button>
+        </div>
+
+
+        <span class="fs-3 text-success">{{success_message}}</span>
+        <span class="fs-3 text-danger">{{error_message}}</span>
+    </form>
+    <hr/>
+
+</div>
+
+

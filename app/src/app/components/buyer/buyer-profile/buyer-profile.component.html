@@ -1,0 +1,41 @@
+<div class="container">
+    <h3>Buyer profile</h3>
+
+    <form ngNativeValidate #form>
+        <div class="row">
+            <div class="col-2 fs-3">
+                Password:
+            </div>
+            <div class="col-3">
+                <input type="password" id="old_password" name="old_password" class="form-control form-control-lg" placeholder="old_password" [(ngModel)]="old_password" required/>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-2 fs-3">
+                New password:
+            </div>
+            <div class="col-3">
+                <input type="password" id="new_password" name="new_password" class="form-control form-control-lg" placeholder="new_password" [(ngModel)]="new_password" required/>
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-3 fs-3">
+                Reapeat new password:
+            </div>
+            <div class="col-3">
+                <input type="password" id="repeat_new_password" name="repeat_new_password" class="form-control form-control-lg" placeholder="repeat_new_password" [(ngModel)]="repeat_new_password" required/>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-2 offset-2">
+                <button type="submit" class="btn btn-lg btn-block btn-primary" (click)="form.checkValidity() ? changePassword():null">Change password</button>
+            </div>
+            <div class="col-5">
+                <span class="fs-4 text-danger">{{message}}</span>
+            </div>
+        </div>
+
+    </form>
+
+</div>
